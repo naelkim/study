@@ -85,13 +85,99 @@ while True:
 
 
 # Q8 data 에서 공대인 학과의 수와 공대가 아닌 학과의 수를 구해라 ( count사용 금지 )
+# while 사용
 data = ['경제학과','생명공학과','기계공학과','수학과','컴퓨터공학과','법학과','통계학과','전자공학과','전기공학과','토목공학과']
 
-공과대학 = []
+def major(data):
+    공과대학 = []
+    i = 0
+    while i < len(data):
+        if '공' in data[i]: 
+            공과대학.append(data[i])
+        i += 1
+    return print(f'공과대학 학과의 수 : {len(공과대학)}, 다른 단과대학 학과의 수 : {len(data) - len(공과대학)}')
+
+major(data)
+
+
+# Q 1
+for i in range(15, 0, -3):
+    print(i, end = ' ')
+
+# Q 2
+a = []
+for i in range(1, 6, 2):
+    a.append(i)
+print(a[0], a[1], a[2])
+
+# Q 3
+
+def solution(A):
+    result = 0
+    sol = []
+    for i in A:
+        result += i
+
+    result = result / len(A)
+
+    for j in A:
+        if j <= result :
+            sol.append(j)
+    
+    return sol
+
+A = [50, 60, 40, 90, 45]
+
+solution(A)
+
+
+
+# Q 4
+
+d1 = list(range(1, 20, 2))
+result = []
+for i in d1:
+    result.append(i % 5)
+print(result) 
+    
+
+
+
+# Q 6
+def sosu(number):
+    for i in range(2, number):
+        if number % i == 0:
+            print('소수가 아닙니다.')
+            break
+        else:
+            print('소수입니다.')
+            break
+    return 
+
+number = int(input())
+
+sosu(number)
+
+
+# Q 7
+
+arr = [[int(input()) for i in range(2)] for j in range(5)]
+
+
+
+# Q 8
+
+a = list(int(input()) for i in range(4))
+arr = [
+    [a[0], a[0]**2, a[0]**2**2, a[0]**2**2**2],
+    a[1], a[1]**2, a[1]**2**2, a[1]**2**2**2,
+    a[2], a[2]**2, a[2]**2**2, a[2]**2**2**2,
+    a[3], a[3]**2, a[3]**2**2, a[3]**2**2**2 ]
+
+
 i = 0 
-while i <= len(data):
-    if '공' in data[i]: 공과대학.append(data[i])
-    i += 1
-
-print(f'공과대학 학과의 수 : {len(공과대학)}, 다른 단과대학 학과의 수 : {len(data) - len(공과대학)}')
-
+while i<=5:
+    arr = [[0 for i in range(4)] for j in range(5)]
+    for j in range(4):
+        for k in range(5):
+            arr[j][k] = arr[j][k]**2
