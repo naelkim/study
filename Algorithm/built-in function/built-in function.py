@@ -117,7 +117,75 @@ issubclass(fooboo, object)
 
 
 # pow()
+2 ** 3 # 8
+pow(2, 3) # 8
+
+pow(100, 2) # 10000
+
+pow(100, -2) # 0.0001
+
+pow(100, (1/2)) # 10.0
+
+pow(100, -1/2) # 0.1
+
+pow(100, -1/3) # 0.21544---
 
 
+# 나눈 나머지
+pow(2, 3) % 3 # 2
+
+pow(2, 3, 3) # 2
 
 # super()
+# 상속, 오버라이딩
+# 자식 클래스에서 부모클래스의 내용을 사용하고 싶을때 사용
+
+class father():  # 부모 클래스
+    def handsome(self):
+        print("잘생겼다")
+ 
+ 
+class brother(father):  # 자식클래스(부모클래스) 아빠매소드를 상속받겠다
+    '''아들'''
+ 
+ 
+class sister(father):  # 자식클래스(부모클래스) 아빠매소드를 상속받겠다
+    def pretty(self):
+        print("예쁘다")
+ 
+    def handsome(self):
+       super().handsome()
+ 
+ 
+brother = brother()
+brother.handsome()
+ 
+girl = sister()
+girl.handsome()
+girl.pretty()
+
+
+
+
+class father():  # 부모 클래스
+    def __init__(self, who):
+        self.who = who
+ 
+    def handsome(self):
+        print("{}를 닮아 잘생겼다".format(self.who))
+ 
+class sister(father):  # 자식클래스(부모클래스) 아빠매소드를 상속받겠다
+    def __init__(self, who, where):
+        super().__init__(who)
+        self.where = where
+ 
+    def choice(self):
+        print("{} 말이야".format(self.where))
+ 
+    def handsome(self):
+       super().handsome()
+       self.choice()
+ 
+girl = sister("아빠", "얼굴")
+girl.handsome()
+
