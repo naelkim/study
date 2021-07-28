@@ -143,3 +143,7 @@ np.save("some_array", arr)
 np.load("some_array.npy")
 
 
+# 과제 
+result = np.random.randint(1, 5, 100)
+
+np.where(result > 3, 1, 0)
