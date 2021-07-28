@@ -135,3 +135,11 @@ bools.all()
 value1 = np.array([6, 0, 0, 3, 2, 5, 6])
 value2 = np.array([2, 3,6])
 np.in1d(value1, value2)
+
+
+arr = np.arange(10)
+np.save("some_array", arr)
+
+np.load("some_array.npy")
+
+
