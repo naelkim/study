@@ -65,19 +65,62 @@ md.pattern(airquality)
 
 # VIM package ----
 
+if (!require(VIM)) install.packages('VIM')
+library(VIM)
+
+# aggr ----
+# prop : default = TRUE, 확률값이 나오고, FALSE는 결측치의 개수.
+# number : default = FALSE,오른쪽의 각 대응되는 패턴의 개수를 의미한다.
+# sortVar : sort_values
+miss <- aggr(airquality, prop=FALSE ,numbers=TRUE, sortVar=TRUE)
+
+summary(miss)$combinations
+
+# matrixplot ----
+# sortby : 해당 열을 가지고 정렬을 해준다.
+# 내림차순으로 정령해준다. 
+matrixplot(airquality, sortby= 'Month') # Month 대신에 5 숫자로 넣어도 가능.
+
+# marginplot ----
+# scatterplot은 Solar.R과 Ozone의 관계를 보여주며, 누락된 값은 제외한다.
+# Y축 margin region의 boxplot은 Solar.R 변수값이 존재하는 경우와 누락된 경우의 Ozone 변수의 분포.
+# X축 margin region의 boxplot은 Ozone 변수값이 존재하는 경우와 누락된 경우의 Solar.R 변수의 분포.
+
+# 결측값은 빨간색으로 표시되어 있다. (orangered)
+# Y축 barplot 아래의 숫자는 Ozone 변수에 결측치가 발생한 케이스의 수
+# X축 barplot 아래의 숫자는 Solar.R 변수에 결측치가 발생한 케이스의 수
+# 구석의 교차지점은 두 변수 모두 결측치가 발생한 케이스의 수 
+
+marginplot(airquality[c('Solar.R', 'Ozone')],
+           pch=20, col=c('cornflowerblue', 'orangered', 'purple'))
 
 
+# correlation ----
+
+# boolean 값에 abs를 해주면 0, 1 로 변환된다. 
+x <- data.frame(abs(is.na(airquality)))
+head(airquality)
+head(x)
+
+# 결측치가 있는 columns을 가져온다.
+# 결측치가 있는 변수 간 상관계수를 check할 때 그닥 유의미하다고는 볼 수 없다.
+y <- x[colSums(x) > 0]
+cor(y)
+
+with(y, cor.test(Ozone, Solar.R))
+
+if (!require(dplyr)) install.packages('dplyr')
+library(dplyr)
+
+head(y)
 
 
+y %>% 
+  cor.test(Ozone, Solar.R)
+
+with(y, cor.test(Ozone, Solar.R))
 
 
-
-
-
-
-
-
-
-
+cor.test(y$Ozone, y$Solar.R)
 
 
