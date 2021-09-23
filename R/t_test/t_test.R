@@ -99,17 +99,89 @@ t.test(Bwt.f, Bwt.m)
 
 
 
+########################################################
+x1 <-c(246.3,255,245.8,250.7,247.7,246.3,214,242.7,287.5,284.6,268.7,302.6,248.3,243.7,276.7,254.9)
+x2 <-c(340.7,270.1,371.6,306.6,263.4,341.6,307,319.1,272.6,332.6,362.2,358.1,271.4,303.9,324.7,360.1)
+
+# var test / F test
+var.test(x1, x2)
 
 
 
 
+tstar = function(x1,x2,mu){
+  a=(mean(x1) - mean(x2)-mu) / sqrt(var(x1)/length(x1) + var(x2)/length(x2))
+  a
+}
+# tstar 를 구했을 때 -5.882092가 나온다 
+tstar(x1,x2,mu = 0)
+# default가 5자리에서 반올림하는 것을 확인할 수 있다. 
+t.test(x1,x2,mu=0)
+
+
+df = function(x1,x2){
+  n1 = length(x1) ; n2 =length(x2)
+  a=((var(x1)/n1+var(x2)/n2)^2 / ((var(x1)/n1)^2/(n1-1)+(var(x2)/n2)^2/(n2-1)))
+  a
+  
+} # 명진이는 a 에 floor (내림) 붙임
+df(x1,x2)
+?pt
+pt(-5.882092,24.64349)*2 
+t.test(x1,x2,mu=0)$p.value
+
+pv <- function(x1,x2,l){
+  n1 = length(x1) ; n2 = length(x2)
+  tstar=(mean(x1) - mean(x2)-l) / sqrt(var(x1)/n1+ var(x2)/n2)
+  df=((var(x1)/n1+var(x2)/n2)^2 / ((var(x1)/n1)^2/(n1-1)+(var(x2)/n2)^2/(n2-1)))
+  
+  cat(pt(tstar,df)*2)
+}
+
+pv(x1,x2,0)
+t.test(x1,x2,mu=0)$p.value
+
+
+pvalu = function(tstar,df){
+  if(tstar>0) {result <-pt(tstar,df,lower.tail=F)*2}
+  else {result<-pt(tstar,df)*2}
+  cat(result)
+}
+pvalu(tstar(x1,x2,0),df(x1,x2))
+pvalu(-5.882092,24.64349) 
 
 
 
 
+p.value = function(tstar,df,sided){
+  if(sided=="two.sided"){
+    ifelse(tstar>0,p<-pt(tstar,df,lower.tail=F)*2,p<-pt(tstar,df)*2)
+  }
+  if(sided=="less"){
+    p<-pt(tstar,df)
+  }
+  if(sided=="greater"){
+    p<-pt(tstar,df,lower.tail=F)
+  }
+  
+  p
+}
 
+all.equal(p.value(tstar(x1,x2,0),df(x1,x2),"two.sided"),t.test(x1,x2,"two.sided")$p.value)
 
+all.equal(p.value(tstar(x1,x2,0),df(x1,x2),"less"),t.test(x1,x2,"less")$p.value)
 
+all.equal(p.value(tstar(x1,x2,0),df(x1,x2),"greater"),t.test(x1,x2,"greater")$p.value)
+
+# 아직 alpha는 고려하지 않았으므로 완전 치 못하다.
+
+pt(-5.882092,24.64349)*2
+
+p.value(tstar(x1,x2,0),df(x1,x2),"two.sided")
+p.value(tstar(x1,x2,0),df(x1,x2),"less")
+p.value(tstar(x1,x2,0),df(x1,x2),"two.sided")
+
+t.test(x1,x2,mu=0)$p.value
 
 
 
