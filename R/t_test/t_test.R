@@ -97,6 +97,29 @@ Bwt.m <- cats$Bwt[cats$Sex=='M']
 t.test(Bwt.f, Bwt.m)
 
 
+smokers <- c(83, 90, 129, 70)
+patients <- c(86, 93, 136, 82)
+
+
+# 폐질환자 대비 흡연자 비율을 확인
+# 네 병원의 폐질환자 대비 흡연자 비율이 같다는 귀무가설을 기각한다.
+prop.test(smokers, patients)
+
+str(sleep)
+
+# paired - smaples t test
+
+sleep[seq(1, 20, 2), ]  
+
+# extra = 수면제를 먹은 후 수면시간의 차이
+t.test(extra ~ group, data = sleep, paired = TRUE)
+library(tidyr)
+# wide format
+sleep.wide <- spread(sleep, key=group, value=extra)
+sleep.wide
+# 위 분석 결곽와 동일하다.
+t.test(sleep.wide$'1', sleep.wide$'2', paired=TRUE)
+
 
 
 ########################################################
@@ -124,9 +147,11 @@ df = function(x1,x2){
   a=((var(x1)/n1+var(x2)/n2)^2 / ((var(x1)/n1)^2/(n1-1)+(var(x2)/n2)^2/(n2-1)))
   a
   
-} # 명진이는 a 에 floor (내림) 붙임
+} 
+
 df(x1,x2)
-?pt
+
+
 pt(-5.882092,24.64349)*2 
 t.test(x1,x2,mu=0)$p.value
 
