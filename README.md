@@ -23,3 +23,7 @@ https://hoya012.github.io/blog/albumentation_tutorial/
 https://github.com/Team-Neighborhood/I-want-to-study-Data-Science
 
 #
+
+한국어 Bigbird가 나왔습니다. 
+https://github.com/monologg/KoBigBird
+#
