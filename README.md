@@ -22,8 +22,11 @@ https://hoya012.github.io/blog/albumentation_tutorial/
 
 https://github.com/Team-Neighborhood/I-want-to-study-Data-Science
 
-#
+# NLP
 
 한국어 Bigbird가 나왔습니다. 
 https://github.com/monologg/KoBigBird
-#
+
+KoBART-sum task 입니다.
+
+https://github.com/seujung/KoBART-summarization
