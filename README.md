@@ -27,6 +27,5 @@ https://github.com/Team-Neighborhood/I-want-to-study-Data-Science
 한국어 Bigbird가 나왔습니다. 
 https://github.com/monologg/KoBigBird
 
-KoBART-sum task 입니다.
-
+KoBART-sum task 입니다. 
 https://github.com/seujung/KoBART-summarization
