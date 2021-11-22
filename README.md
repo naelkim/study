@@ -29,3 +29,7 @@ https://github.com/monologg/KoBigBird
 
 KoBART-sum task 입니다. 
 https://github.com/seujung/KoBART-summarization
+
+기존의 Transformer의 입력 문서의 단어 길이가 512로 제한되어 있던 문제를 해결하고 시간복잡도까지 개선한 모델인 Longformer가 나왔습니다. 
+
+https://github.com/allenai/longformer
